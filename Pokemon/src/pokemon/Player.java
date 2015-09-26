@@ -15,6 +15,8 @@ public class Player {
 		this.field = new Field();
 	}
 	public void turnSequence(){
-		
+		while (true){
+			
+		}
 	}
 }
