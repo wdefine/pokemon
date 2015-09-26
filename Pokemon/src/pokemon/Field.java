@@ -14,8 +14,8 @@ public class Field {
 		this.benchname = name + "'s bench";
 	}
 	public void swap(int index){
-		Pokemon newb = bench.get(index-1);
-		bench.remove(index-1);
+		Pokemon newb = bench.get(index);
+		bench.remove(index);
 		if (arena == null){
 			arena = newb;
 		}
