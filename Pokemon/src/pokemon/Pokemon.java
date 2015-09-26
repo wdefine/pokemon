@@ -18,18 +18,24 @@ public abstract class Pokemon extends Card {
 		experience =+ 1;
 	}
 	public int attack(int advantage){
-		return movedamage + advantage*20;
+		if (movedamage > 5000){
+			hp =- 60;
+			return movedamage + advantage*20;
+		}
+		else{
+			return movedamage + advantage*20;
+		}
+	}
+	public boolean canAttack(){
+		if (experience == 0){
+			return false;
+		}
+		else{
+			return true;
+		}
 	}
 	public void beattacked(int damage){
 		hp =- damage;
-	}
-	public boolean isDead(){
-		if (hp <= 0){
-			return true;
-		}
-		else{
-			return false;
-		}
 	}
 	public boolean isPokemon(){
 		return true;
@@ -61,5 +67,12 @@ public abstract class Pokemon extends Card {
 			hpdistortion = 0;
 			experience = 0;
 		}
+	}
+	public void print(){
+		System.out.println(name);
+		System.out.println(movename);
+		System.out.println("Move Damage = " + movedamage);
+		System.out.println("Health = " + hp);
+		System.out.println("Experience = " + experience);
 	}
 }

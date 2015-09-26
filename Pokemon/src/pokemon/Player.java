@@ -12,7 +12,7 @@ public class Player {
 	public Player(String name,Deck deck){
 		this.name = name;
 		this.deck = deck;
-		this.field = new Field();
+		this.field = new Field(name);
 	}
 	public void turnSequence(){
 		while (true){
