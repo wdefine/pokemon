@@ -69,6 +69,7 @@ public abstract class Pokemon extends Card {
 		}
 	}
 	public void print(){
+		System.out.println("Pokemon Card");
 		System.out.println(name);
 		System.out.println(movename);
 		System.out.println("Move Damage = " + movedamage);

@@ -14,6 +14,26 @@ public class Player {
 		this.deck = deck;
 		this.field = new Field(name);
 	}
+	public void printHand(){
+		System.out.println("Player" + name + "'s Hand:");
+		for (int i=0; i < hand.size(); i++){
+			int x = i +1;
+			System.out.println("At index number " + x + ":");
+			hand.get(i).print();
+		}
+	}
+	public void playCard(int index){
+		Card card = hand.get(index);
+		hand.remove(index);
+		if (card.isPokemon() == true){
+			Pokemon cardy = (Pokemon) card;
+			field.addField(cardy);
+		}
+		else{
+			Trainer cardie = (Trainer) card;
+			
+		}
+	}
 	public void turnSequence(){
 		while (true){
 			

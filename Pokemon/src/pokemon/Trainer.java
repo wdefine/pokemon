@@ -9,4 +9,8 @@ public abstract class Trainer extends Card {
 	public boolean isPokemon(){
 		return false;
 	}
+	public void print(){
+		System.out.println("Tranier Card");
+		System.out.println(name);
+	}
 }

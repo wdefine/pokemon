@@ -34,15 +34,23 @@ public class Field {
 	}
 	public void printField(){
 		System.out.println(arenaname);
-		arena.print();
+		System.out.println("Index 0: (your arena card");
+		if (arena != null){
+			arena.print();
+		}
+		else{
+			System.out.println("Arena positionis empty");
+		}
 		System.out.println(benchname);
-		for (int i = 0; i < bench.size(); i--){
+		for (int i = 0; i < bench.size(); i++){
 			int x = i+1;
-			System.out.println("At bench position " + x + ":");
+			System.out.println("Index " + x + ":");
 			bench.get(i).print();
 		}
 	}
 	public void clearDead(){
-		if arena.Hp
+		if (arena.hp <= 0){
+			arena = null;
+		}
 	}
 }
