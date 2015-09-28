@@ -20,7 +20,7 @@ public class Field {
 			arena = newb;
 		}
 		else{
-			bench.add(index-1, arena);
+			bench.add(index, arena);
 			arena = newb;
 		}
 	}
@@ -51,6 +51,12 @@ public class Field {
 	public void clearDead(){
 		if (arena.hp <= 0){
 			arena = null;
+		}
+	}
+	public void upExperience(){
+		arena.upExperience();
+		for(int i = 0; i < bench.size(); i++){
+			bench.get(i).upExperience();
 		}
 	}
 }

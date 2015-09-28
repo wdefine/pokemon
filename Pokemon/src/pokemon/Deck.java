@@ -92,12 +92,15 @@ public class Deck{ //creates a deck from the given file name
 	}
 
 
-Random generator = new Random(); //makes a random number generator, instance of the class random
+	Random generator = new Random(); //makes a random number generator, instance of the class random
 
-public Card draw(){
-	int randomNumber = generator.nextInt((deck.size())); //next int sets it from 0 to size, have to create an int to store the value
-	 Card drawn_card = deck.get(randomNumber); //gets a random card from the deck list
-	deck.remove(randomNumber);
-	return drawn_card;
-}
+	public Card draw(){
+		int randomNumber = generator.nextInt((deck.size())); //next int sets it from 0 to size, have to create an int to store the value
+		Card drawn_card = deck.get(randomNumber); //gets a random card from the deck list
+		deck.remove(randomNumber);
+		return drawn_card;
+	}
+	public int getDecksize(){
+		return deck.size();
+	}
 }

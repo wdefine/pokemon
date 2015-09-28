@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Pokemon extends Card {
+	abstract int compareTo(Pokemon pokemon);
 	public String name;
 	public String type;
 	public int hp;

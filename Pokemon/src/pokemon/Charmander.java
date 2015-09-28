@@ -7,9 +7,10 @@ public class Charmander extends Fire {
 		this.hp = 60;
 		this.hpmax = 60;
 		this.movedamage = 20;
-		this.movename = "Ember";
-		Evolvedstate beta = new Evolvedstate("Charmeleon", "Flamethrower", 30,90,30);
-		Evolvedstate alpha = new Evolvedstate("Charizard", "Flare Blitz", 30,120,60);
+		this.movename = "Ember!";
+		Evolvedstate beta = new Evolvedstate("Charmeleon", "Flamethrower!", 30,90,30);
+		Evolvedstate alpha = new Evolvedstate("Charizard", "Flare Blitz!", 30,120,60);
+		//pokemon name, move name, added health, new max health, new move damage
 		evolutions.add(beta);
 		evolutions.add(alpha);
 		

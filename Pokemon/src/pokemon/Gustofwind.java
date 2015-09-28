@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Gustofwind extends Trainer {
 	public Gustofwind(){
 		this.name = "Gust of Wind";
+		this.recipient = -1;
 	}
 	Scanner gosws = new Scanner(System.in);
 	public void play(Player player){
@@ -17,8 +18,8 @@ public class Gustofwind extends Trainer {
 			System.out.println("Gust of Wind cannot be used on arena card. Gust of Wind card lost.");
 			}	
 		else{
-			if (player.field.bench.get(target-1) != null){
-				player.field.swap(target-1);
+			if (field.bench.get(target-1) != null){
+				field.swap(target-1);
 			}
 			else{
 				System.out.println("Wind can't blow null. Gust of Wind discarded");

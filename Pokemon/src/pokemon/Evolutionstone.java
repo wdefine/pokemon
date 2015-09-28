@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Evolutionstone extends Trainer {
 	public Evolutionstone(){
 		this.name = "Evolution Stone";
-
+		this.recipient = 1;
 	}
 	Scanner ess = new Scanner(System.in);
 	public void play(Player player){
@@ -15,17 +15,14 @@ public class Evolutionstone extends Trainer {
 		int target = ess.nextInt();
 		String bs = ess.nextLine();
 		if (target == 0){
-			if (player.field.arena != null){
-				player.field.arena.evolve();
+			if (field.arena != null){
+				field.arena.evolve();
 			}
 			else{
-				if (player.field.bench.get(target-1) != null){
-					player.field.bench.get(target-1).evolve();
+				if (field.bench.get(target-1) != null){
+					field.bench.get(target-1).evolve();
 				}
 			}
 		}
-	}
-	public void play(Pokemon pokemon){
-		pokemon.evolve();
 	}
 }
