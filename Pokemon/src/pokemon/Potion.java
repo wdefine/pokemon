@@ -1,19 +1,14 @@
 package pokemon;
 
-import java.util.Scanner;
 
 public class Potion extends Trainer {
 	public Potion(){
 		this.name = "Potion";
 		this.recipient = 1;
 	}
-	Scanner potions = new Scanner(System.in);
 	public void play(Player player){
 		Field field = player.field;
-		System.out.println("Insert index number of recipient of HP UP");
-		field.printField();
-		int target = potions.nextInt();
-		String bs = potions.nextLine();
+		int target = Io.playPotion(player);
 		if (target == 0){
 			if (player.field.arena != null){
 				if (field.arena.hp + 20 <= player.field.arena.hpmax){

@@ -9,15 +9,9 @@ import java.util.List;
 import java.util.Random;
 
 public class Deck{ //creates a deck from the given file name
-	private static String filename;
 	private static List<Card> deck = new ArrayList<Card>(); //creates an empty list called deck
 
-	public Deck(String filename){
-		this.filename = filename; 
-		create_deck(); //calls on the deck function which will add the cards to the empty list
-	}
-
-	public static void create_deck(){ //WILL CREATE CARDS
+	public Deck(String filename){ //WILL CREATE CARDS
 
 		// This will reference one line at a time
 		String line = null;
@@ -62,16 +56,16 @@ public class Deck{ //creates a deck from the given file name
 				if (cn.equals("Potion")){
 					deck.add(new Potion());
 				}
-				if (cn.equals("Hpup")){
+				if (cn.equals("Hp UP")){
 					deck.add(new Hpup());
 				}
-				if (cn.equals("Helpfrommom")){
+				if (cn.equals("Help From Mom")){
 					deck.add(new Helpfrommom());
 				}
-				if (cn.equals("Evolutionstone")){
+				if (cn.equals("Evolution Stone")){
 					deck.add(new Evolutionstone());
 				}
-				if (cn.equals("Gustofwind")){
+				if (cn.equals("Gust Of Wind")){
 					deck.add(new Gustofwind());
 				}
 
@@ -79,7 +73,6 @@ public class Deck{ //creates a deck from the given file name
 			}   
 			// Always close files.
 			bufferedReader.close(); 
-			return; //returns to end the function
 		}
 		catch(FileNotFoundException ex){
 			System.out.println("No Text File Found");
@@ -95,12 +88,29 @@ public class Deck{ //creates a deck from the given file name
 	Random generator = new Random(); //makes a random number generator, instance of the class random
 
 	public Card draw(){
-		int randomNumber = generator.nextInt((deck.size())); //next int sets it from 0 to size, have to create an int to store the value
+		int x = this.getDecksize();
+		int randomNumber = generator.nextInt((x)); //next int sets it from 0 to size, have to create an int to store the value
 		Card drawn_card = deck.get(randomNumber); //gets a random card from the deck list
 		deck.remove(randomNumber);
 		return drawn_card;
 	}
 	public int getDecksize(){
 		return deck.size();
+	}
+	public static String isFile(String filename){
+		try {
+			FileReader fileReader = 
+					new FileReader(filename);
+			BufferedReader bufferedReader = 
+					new BufferedReader(fileReader);
+			bufferedReader.close();
+			return filename;
+		}
+		catch(FileNotFoundException ex){
+			return "x";
+		}
+		catch(IOException ex) {
+			return "x";
+		}
 	}
 }

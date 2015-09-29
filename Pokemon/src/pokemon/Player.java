@@ -2,7 +2,6 @@ package pokemon;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Player { 
 	public String name;
@@ -16,7 +15,9 @@ public class Player {
 		this.field = new Field(name);
 	}
 	public void printHand(){
-		System.out.println("Player" + name + "'s Hand:");
+		System.out.println(hand.size());
+		System.out.println(deck.getDecksize());
+		System.out.println("Player " + name + "'s Hand:");
 		for (int i=0; i < hand.size(); i++){
 			int x = i +1;
 			System.out.println("At index number " + x + ":");
@@ -42,47 +43,42 @@ public class Player {
 	}
 	public boolean turnSequence(Player opponent, Player me){
 		hand.add(deck.draw());
-		Scanner turn_response = new Scanner(System.in);
+		String command;
 		while (true){
-			System.out.println("Here is your list of commands!\n" + 
-		"(print field) will show pokemon in the field and their hp status\n" +
-					"(print hand) will reveal your hand and the number of cards left in each deck\n" +
-		"(attack) causes your pokemon in the arena to attack the opponent\n" +
-					"(switch) allows you to switch the pokemon in the arena with you bench pokemon\n" +
-		"(play) allows you to play a card from you hand\n" + 
-					"(pass) allows you to skip your turn/end it");
-			
-			
-			if(turn_response.nextLine().equals("print field")){
+			command = Io.getCommand();
+			if(command.equals("print field")){
 				opponent.field.printField();
 				me.field.printField();
 			}
-			if(turn_response.nextLine().equals("print hand")){
+			else if(command.equals("print hand")){
 				me.printHand();
 				int ds = me.deck.getDecksize();
 				System.out.println("My deck has " + ds + " cards in it.");
 				int dso = opponent.deck.getDecksize();
 				System.out.println("My Opponent's deck has " + dso + " cards in it.");
 			}
-			if(turn_response.nextLine().equals("attack")){
-				int compare = me.field.arena.compareTo(opponent.field.arena);
-				int attack = me.field.arena.attack(compare);
-				if (opponent.field.arena == null){
-					System.out.println("Player " + me.name + " is the winner!");
-					return false;//game over
+			else if(command.equals("attack")){
+				if (me.field.arena != null && me.field.arena.experience != 0){
+					if (opponent.field.arena == null){
+						System.out.println("Player " + me.name + " is the winner!");
+						return false;//game over
+					}
+					else{
+						int compare = me.field.arena.compareTo(opponent.field.arena);
+						int attack = me.field.arena.attack(compare);
+						opponent.field.arena.beattacked(attack);
+						opponent.field.clearDead();
+						me.field.clearDead();
+						me.field.upExperience();
+						return true;
+					}
 				}
 				else{
-					opponent.field.arena.beattacked(attack);
-					opponent.field.clearDead();
-					me.field.clearDead();
-					me.field.upExperience();
-					return true;
+					System.out.println("You are in no position to attack");
 				}
 			}
-			if(turn_response.nextLine().equals("switch")){
-				System.out.println("Which bench player do you want to move to the arena");
-				String line = turn_response.nextLine();
-				int index = Integer.parseInt(line);
+			else if(command.equals("switch")){
+				int index = Io.getSwitch();
 				if (index < 7 && index >0){
 					me.field.swap(index-1);
 					me.field.upExperience();
@@ -92,15 +88,13 @@ public class Player {
 					System.out.println("Not a valid bench position");
 				}
 			}
-			if(turn_response.nextLine().equals("play")){
-				System.out.println("Pick a card from your hand to play.");
-				String line = turn_response.nextLine();
-				int index = Integer.parseInt(line);
+			else if(command.equals("play")){
+				int index = Io.getPlay();
 				if (index < hand.size()+1 && index > 0){
 					me.playCard(index-1, opponent, me);
 				}
 			}
-			if(turn_response.nextLine().equals("pass")){
+			else if(command.equals("pass")){
 				me.field.upExperience();
 				return true;
 			}
