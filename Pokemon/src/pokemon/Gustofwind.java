@@ -14,7 +14,7 @@ public class Gustofwind extends Trainer {
 			}	
 		else{
 			if (field.bench.get(target-1) != null){
-				field.swap(target-1);
+				field.swap(target-1, player);
 			}
 			else{
 				System.out.println("Wind can't blow null. Gust of Wind discarded");

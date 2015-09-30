@@ -8,6 +8,9 @@ public class Helpfrommom extends Trainer {
 	
 	public void play(Player player){
 		for (int i = 3; i > 0; i--){
+			if (player.deck.getDecksize() == 0){
+				break;
+			}
 			player.hand.add(player.deck.draw());
 		}
 	}

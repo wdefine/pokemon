@@ -1,9 +1,12 @@
 package pokemon;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class Main {
 
 	public static void main(String[] args) {
-
+		
 		System.out.print("Welcome to the world of Pokemon!\n" 
 				+ "Lets see which trainer has what it takes to be the very best!\n");
 		String x = "Player1";
@@ -14,13 +17,21 @@ public class Main {
 		Deck deck2 = createDeck(playertwo_name);
 
 		Player player1 = new Player(playerone_name, deck1); //constructs the player 1
-
-		for(int i=0; i < 3 ;i++){ //creating the starting hand for player one
+		
+		for(int i=0; i < 6 ;i++){ //creating the starting hand for player one
+			if (player1.deck.getDecksize() == 0){
+				break;
+			}
+			//System.out.println(player1.deck.getDecksize());
 			player1.hand.add(player1.deck.draw());
+			//System.out.println(player1.deck.getDecksize());
 		}
 		Player player2 = new Player(playertwo_name, deck2); //constructs the player 2
 
 		for(int i=0; i < 3 ;i++){ //creating the starting hand for player two
+			if (player1.deck.getDecksize() == 0){
+				break;
+			}
 			player2.hand.add(player2.deck.draw());
 		} 
 

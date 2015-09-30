@@ -15,9 +15,9 @@ public class Player {
 		this.field = new Field(name);
 	}
 	public void printHand(){
-		System.out.println(hand.size());
-		System.out.println(deck.getDecksize());
-		System.out.println("Player " + name + "'s Hand:");
+		System.out.println("You have " + hand.size() + " cards in your hand");
+		System.out.println("You have " + deck.getDecksize() + " cards in your deck");
+		System.out.println(name + "'s Hand:");
 		for (int i=0; i < hand.size(); i++){
 			int x = i +1;
 			System.out.println("At index number " + x + ":");
@@ -29,10 +29,12 @@ public class Player {
 		hand.remove(index);
 		if (card.isPokemon() == true){
 			Pokemon cardy = (Pokemon) card;
+			System.out.println("You've chosen to play a " + cardy.name + " card");
 			field.addField(cardy);
 		}
 		else{
 			Trainer cardie = (Trainer) card;
+			System.out.println("You've chosen to play a " + cardie.name + " card");
 			if (cardie.recipient == 1){
 				cardie.play(me);//trainer card needs players for here
 			}
@@ -42,13 +44,17 @@ public class Player {
 		}
 	}
 	public boolean turnSequence(Player opponent, Player me){
-		hand.add(deck.draw());
+		if (me.deck.getDecksize() == 0){
+		}
+		else{
+			me.hand.add(deck.draw());
+		}
 		String command;
 		while (true){
-			command = Io.getCommand();
+			command = Io.getCommand(me);
 			if(command.equals("print field")){
-				opponent.field.printField();
-				me.field.printField();
+				opponent.field.printField(opponent);
+				me.field.printField(me);
 			}
 			else if(command.equals("print hand")){
 				me.printHand();
@@ -78,18 +84,19 @@ public class Player {
 				}
 			}
 			else if(command.equals("switch")){
+				Io.promptField(me);
 				int index = Io.getSwitch();
-				if (index < 7 && index >0){
-					me.field.swap(index-1);
+				if (index < me.deck.getDecksize() && index >0){
+					me.field.swap(index-1, me);
 					me.field.upExperience();
 					return true;
 				}	
 				else{
-					System.out.println("Not a valid bench position");
+					System.out.println("Not a valid bench position.");
 				}
 			}
 			else if(command.equals("play")){
-				int index = Io.getPlay();
+				int index = Io.getPlay(me);
 				if (index < hand.size()+1 && index > 0){
 					me.playCard(index-1, opponent, me);
 				}

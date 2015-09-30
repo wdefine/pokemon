@@ -13,15 +13,15 @@ public class Field {
 		this.arenaname = name + "'s arena";
 		this.benchname = name + "'s bench";
 	}
-	public void swap(int index){
-		Pokemon newb = bench.get(index);
-		bench.remove(index);
-		if (arena == null){
-			arena = newb;
+	public void swap(int index, Player player){
+		Pokemon newb = player.field.bench.get(index);
+		player.field.bench.remove(index);
+		if (player.field.arena == null){
+			player.field.arena = newb;
 		}
 		else{
-			bench.add(index, arena);
-			arena = newb;
+			player.field.bench.add(player.field.arena);
+			player.field.arena = newb;
 		}
 	}
 	public void addField(Pokemon card){
@@ -32,21 +32,39 @@ public class Field {
 			bench.add(card);
 		}
 	}
-	public void printField(){
-		System.out.println(arenaname);
-		System.out.println("Index 0: (your arena card");
-		if (arena != null){
-			arena.print();
+	public void printField(Player player){
+		System.out.println(player.field.arenaname);
+		System.out.println("Index 0: (arena card)");
+		if (player.field.arena != null){
+			player.field.arena.print();
+			if (player.field.bench.size() == 0){
+				System.out.println(player.field.benchname);
+				System.out.println("Bench is empty");
+			}
+			else{
+				System.out.println(player.field.benchname);
+				for (int i = 0; i < player.field.bench.size(); i++){
+					int x = i+1;
+					System.out.println("Index " + x + ":");
+					player.field.bench.get(i).print();
+				}
+			}
 		}
 		else{
-			System.out.println("Arena positionis empty");
-		}
-		System.out.println(benchname);
-		for (int i = 0; i < bench.size(); i++){
-			int x = i+1;
-			System.out.println("Index " + x + ":");
-			bench.get(i).print();
-		}
+			System.out.println("Arena position is empty");
+			if (player.field.bench.size() == 0){
+				System.out.println(player.field.benchname);
+				System.out.println("Bench is empty");
+			}
+			else{
+				System.out.println(player.field.benchname);
+				for (int i = 0; i < player.field.bench.size(); i++){
+					int x = i+1;
+					System.out.println("Index " + x + ":");
+					player.field.bench.get(i).print();
+				}
+			}
+		}	
 	}
 	public void clearDead(){
 		if (arena.hp <= 0){

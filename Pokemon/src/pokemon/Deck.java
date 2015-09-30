@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Deck{ //creates a deck from the given file name
-	private static List<Card> deck = new ArrayList<Card>(); //creates an empty list called deck
+	private List<Card> deck = new ArrayList<Card>(); //creates an empty list called deck
 
 	public Deck(String filename){ //WILL CREATE CARDS
 
@@ -56,16 +56,16 @@ public class Deck{ //creates a deck from the given file name
 				if (cn.equals("Potion")){
 					deck.add(new Potion());
 				}
-				if (cn.equals("Hp UP")){
+				if (cn.equals("HP UP")){
 					deck.add(new Hpup());
 				}
-				if (cn.equals("Help From Mom")){
+				if (cn.equals("Help from Mom")){
 					deck.add(new Helpfrommom());
 				}
 				if (cn.equals("Evolution Stone")){
 					deck.add(new Evolutionstone());
 				}
-				if (cn.equals("Gust Of Wind")){
+				if (cn.equals("Gust of Wind")){
 					deck.add(new Gustofwind());
 				}
 
