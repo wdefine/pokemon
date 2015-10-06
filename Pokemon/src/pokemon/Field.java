@@ -18,10 +18,13 @@ public class Field {
 		player.field.bench.remove(index);
 		if (player.field.arena == null){
 			player.field.arena = newb;
+			System.out.println(player.field.arena.name + " has entered the arena!\n");
 		}
 		else{
 			player.field.bench.add(player.field.arena);
+			System.out.println(newb.name + " replaces " + player.field.arena.name + " in the arena!\n");
 			player.field.arena = newb;
+			
 		}
 	}
 	public void addField(Pokemon card){
@@ -37,6 +40,7 @@ public class Field {
 		System.out.println("Index 0: (arena card)");
 		if (player.field.arena != null){
 			player.field.arena.print();
+			System.out.println("");
 			if (player.field.bench.size() == 0){
 				System.out.println(player.field.benchname);
 				System.out.println("Bench is empty");
@@ -47,11 +51,12 @@ public class Field {
 					int x = i+1;
 					System.out.println("Index " + x + ":");
 					player.field.bench.get(i).print();
+					System.out.println("");
 				}
 			}
 		}
 		else{
-			System.out.println("Arena position is empty");
+			System.out.println("Arena position is empty\n");
 			if (player.field.bench.size() == 0){
 				System.out.println(player.field.benchname);
 				System.out.println("Bench is empty");
@@ -65,16 +70,24 @@ public class Field {
 				}
 			}
 		}	
+		System.out.println("");
 	}
-	public void clearDead(){
-		if (arena.hp <= 0){
-			arena = null;
+	public void clearDead(Player player){
+		if (player.field.arena.hp <= 0){
+			player.field.arena = null;
 		}
 	}
-	public void upExperience(){
-		arena.upExperience();
-		for(int i = 0; i < bench.size(); i++){
-			bench.get(i).upExperience();
+	public void upExperience(Player me){
+		if (me.field.arena != null){
+			me.field.arena.upExperience();
+			for(int i = 0; i < me.field.bench.size(); i++){
+				me.field.bench.get(i).upExperience();
+			}
+		}
+		else{
+			for(int i = 0; i < me.field.bench.size(); i++){
+				me.field.bench.get(i).upExperience();
+			}
 		}
 	}
 }

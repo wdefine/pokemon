@@ -1,6 +1,6 @@
 package pokemon;
 
-public abstract class Grass extends Pokemon {
+public abstract class Grass extends Pokemon {// different compareTo function
 	
 	public int compareTo(Pokemon pokemon){
 		if (pokemon.getType().equals("fire")){

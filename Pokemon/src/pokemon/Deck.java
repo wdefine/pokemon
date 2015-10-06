@@ -68,6 +68,9 @@ public class Deck{ //creates a deck from the given file name
 				if (cn.equals("Gust of Wind")){
 					deck.add(new Gustofwind());
 				}
+				if (cn.equals("Abra")){
+					deck.add(new Abra());
+				}
 
 
 			}   

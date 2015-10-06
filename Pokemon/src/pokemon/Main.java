@@ -1,8 +1,5 @@
 package pokemon;
 
-import java.util.List;
-import java.util.ArrayList;
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -28,29 +25,39 @@ public class Main {
 		}
 		Player player2 = new Player(playertwo_name, deck2); //constructs the player 2
 
-		for(int i=0; i < 3 ;i++){ //creating the starting hand for player two
+		for(int i=0; i < 6 ;i++){ //creating the starting hand for player two
 			if (player1.deck.getDecksize() == 0){
 				break;
 			}
 			player2.hand.add(player2.deck.draw());
 		} 
-
+		boolean endcondition = true;
 		while(true){ //keeps the game moving until someone wins
-			Player me = player1; //keeps track of whose turn it is
-			Player opponent = player2;
-			player1.turnSequence(opponent, me);
-			me = player2;
-			opponent = player1;
-			player2.turnSequence(opponent, me);
+			if (endcondition == true){
+				Player me = player1; //keeps track of whose turn it is
+				Player opponent = player2;
+				endcondition = player1.turnSequence(opponent, me);
+			}
+			else{
+				return;// ends loop
+			}
+			if (endcondition == true){
+				Player me = player2;
+				Player opponent = player1;
+				endcondition = player2.turnSequence(opponent, me);
+			}
+			else {
+				return;//ends loop
+			}
 		}
-
 	}
 	public static Deck createDeck(String name){
 		while (true){
 			String file = Io.getDeck(name);
-			if (Deck.isFile(file).equals("x")){
+			if (Deck.isFile(file).equals("x")){//stay in while loop
+				System.out.println("Please enter valid file");
 			}
-			else{
+			else{//creates deck
 				Deck deck1 = new Deck(file);
 				return deck1;
 			}

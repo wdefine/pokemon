@@ -3,7 +3,8 @@ package pokemon;
 public abstract class Trainer extends Card {
 	public String name;
 	public int recipient;
-	abstract void play(Player player);
+	
+	abstract void play(Player me, Player opponent);
 	
 	public String getName(){
 		return name;
